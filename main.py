@@ -41,14 +41,16 @@ def reconstruct_path(previous_nodes, target):
 
 # Ejemplo de uso
 graph = {
-    'A': {'B': 1, 'C': 4},
-    'B': {'A': 1, 'C': 2, 'D': 5},
-    'C': {'A': 4, 'B': 2, 'D': 1},
-    'D': {'B': 5, 'C': 1}
+    'A': {'B': 1, 'C': 3},
+    'B': {'A': 1, 'C': 1, 'D': 3, 'E': 7},
+    'C': {'A': 3, 'B': 1, 'E': 5},
+    'D': {'B': 3, 'E': 2, 'F': 4},
+    'E': {'B': 7, 'D': 2, 'F': 3},
+    'F': {'D': 4, 'E': 3}
 }
 
 start_node = 'A'
-end_node = 'D'
+end_node = 'F'
 
 # Calcular las distancias más cortas y los caminos
 shortest_distances, previous_nodes = dijkstra(graph, start_node)
