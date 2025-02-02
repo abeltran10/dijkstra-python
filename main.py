@@ -2,7 +2,7 @@ def dijkstra(graph, start):
     shortest_distances = {node: 10000 for node in graph}
     shortest_distances[start] = 0
 
-    for node, p in graph[start].items(): shortest_distances[node] = p
+    for node, w in graph[start].items(): shortest_distances[node] = w
 
     added = {start}
 
@@ -11,13 +11,23 @@ def dijkstra(graph, start):
     previous_nodes = {node: None for node in graph}
 
     while len(in_frontier_from) > 0:
+        # print(f"frontier: {in_frontier_from}")
+
         dmin, u, v = min((shortest_distances[v], u, v) for v, u in in_frontier_from.items())
 
+        # print(f"min: {v}:{u}")
+
         del in_frontier_from[v]
+        # print(f"frontier: {in_frontier_from}")
+
         added.add(v)
+        # print(f"added: {added}")
+
         previous_nodes[v] = u
+        # print(f"previus nodes: {previous_nodes}")
 
         for neighbor, weight in graph[v].items():
+            # print(f"{neighbor}:{weight}")
             if neighbor not in added and shortest_distances[v] + weight < shortest_distances[neighbor]:
                 shortest_distances[neighbor] = shortest_distances[v] + weight
                 in_frontier_from[neighbor] = v
@@ -39,7 +49,6 @@ def reconstruct_path(previous_nodes, target):
 
 
 
-# Ejemplo de uso
 graph = {
     'A': {'B': 1, 'C': 3},
     'B': {'A': 1, 'C': 1, 'D': 3, 'E': 7},
